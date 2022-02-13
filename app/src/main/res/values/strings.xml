@@ -2,7 +2,7 @@
     <string name="app_name">OtpChatAppFirebase</string>
     <string name="we_will_send_you_an">We will send you an</string>
     <string name="one_time_password">One Time Password</string>
-    <string name="type_your_phone_number">Type Your Phone Number</string>
+    <string name="type_your_phone_number">eg: +628953637xxxxx</string>
     <string name="konfirmasi">Continue</string>
     <string name="on_this_phone_number">on this phone number...</string>
     <string name="otp_verification">OTP Verification</string>
