@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "453753869561",
+    "project_id": "chatappobasaka",
+    "storage_bucket": "chatappobasaka.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:453753869561:android:0bed79591a78644f6f7e28",
+        "android_client_info": {
+          "package_name": "id.my.anandalukman.otpchatappfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "453753869561-o9l74c62r6hpgihb86f3iqbhp7hf7c31.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdenorh2FtjzmPl88C_aIHC5oxhEmYhjw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "453753869561-o9l74c62r6hpgihb86f3iqbhp7hf7c31.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
