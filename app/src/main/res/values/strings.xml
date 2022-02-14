@@ -7,4 +7,7 @@
     <string name="on_this_phone_number">on this phone number...</string>
     <string name="otp_verification">OTP Verification</string>
     <string name="verify">Verify </string>
+    <string name="please_set_your_name_and_adjusting_your_profile_image">Please set your name and adjusting your profile Image</string>
+    <string name="profile_information">Profile Information</string>
+    <string name="type_your_name">Type your name</string>
 </resources>
