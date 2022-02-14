@@ -6,4 +6,5 @@
     <string name="konfirmasi">Continue</string>
     <string name="on_this_phone_number">on this phone number...</string>
     <string name="otp_verification">OTP Verification</string>
+    <string name="verify">Verify </string>
 </resources>
