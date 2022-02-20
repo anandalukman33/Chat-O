@@ -52,9 +52,9 @@ dependencies {
     // Firebase stuff library
     implementation platform("com.google.firebase:firebase-bom:26.1.1")
     implementation "com.google.firebase:firebase-analytics-ktx"
-    implementation "com.google.firebase:firebase-auth"
+    implementation "com.google.firebase:firebase-auth-ktx"
     implementation "com.google.firebase:firebase-database"
-    implementation "com.google.firebase:firebase-storage"
+    implementation "com.google.firebase:firebase-storage:17.0.0"
     implementation "com.google.firebase:firebase-messaging"
 
     // A fast circular ImageView perfect for profile images
@@ -76,4 +76,6 @@ dependencies {
     // A custom recycler view with shimmer views to indicate that views are loading.
     implementation "com.github.sharish:ShimmerRecyclerView:v1.3"
 
+    // Custom Progress Dialog
+    implementation 'com.jpardogo.googleprogressbar:library:1.2.0'
 }

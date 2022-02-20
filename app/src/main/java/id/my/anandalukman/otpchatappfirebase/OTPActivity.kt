@@ -13,6 +13,7 @@ import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import id.my.anandalukman.otpchatappfirebase.constant.ChatConstant
 import id.my.anandalukman.otpchatappfirebase.databinding.ActivityOtpactivityBinding
+import id.my.anandalukman.otpchatappfirebase.widget.Loading
 import java.util.concurrent.TimeUnit
 
 class OTPActivity : AppCompatActivity() {
@@ -20,17 +21,14 @@ class OTPActivity : AppCompatActivity() {
     var binding : ActivityOtpactivityBinding? = null
     var verificationId : String? = null
     var auth : FirebaseAuth? = null
-    var dialog : ProgressDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOtpactivityBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
 
-        dialog = ProgressDialog(this)
-        dialog?.setMessage("Sending Otp...")
-        dialog?.setCancelable(false)
-        dialog?.show()
+        var loading = Loading(this)
+        loading.startLoading()
 
         auth = FirebaseAuth.getInstance()
         supportActionBar?.hide()
@@ -51,7 +49,7 @@ class OTPActivity : AppCompatActivity() {
                     verifyId: String,
                     forceResendingToken: PhoneAuthProvider.ForceResendingToken) {
                     super.onCodeSent(verifyId, forceResendingToken)
-                    dialog!!.dismiss()
+                    loading.dismissLoading()
 
                     verificationId = verifyId
 

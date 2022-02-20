@@ -61,6 +61,7 @@
                 android:layout_marginBottom="10dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
+                android:textSize="20sp"
                 android:inputType="number"
                 android:itemBackground="#B6B6B6"
                 android:focusableInTouchMode="true"
