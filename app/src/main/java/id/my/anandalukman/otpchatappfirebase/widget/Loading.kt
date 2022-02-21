@@ -1,27 +1,42 @@
 package id.my.anandalukman.otpchatappfirebase.widget
 
-import android.app.Activity
-import android.app.AlertDialog
+import android.app.Dialog
+import android.content.Context
+import android.os.Bundle
+import android.widget.TextView
 import id.my.anandalukman.otpchatappfirebase.R
 
-class Loading (val mActivity: Activity) {
+class Loading (context: Context, themeResId: Int) : Dialog(context, themeResId) {
 
-    private lateinit var isDialog: AlertDialog
+    private var tvProgress : TextView? = null
+    private var msgProgress: String? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.custom_progress_dialog)
 
-    fun startLoading() {
-        val inflater = mActivity.layoutInflater
-        val dialogView = inflater.inflate(R.layout.custom_progress_dialog, null)
-        val builder = AlertDialog.Builder(mActivity)
-        builder.setView(dialogView)
-        builder.setCancelable(false)
-        isDialog = builder.create()
-        isDialog.show()
+        initUI()
+        updateData()
     }
 
+    private fun initUI() {
+        tvProgress = findViewById(R.id.tv_progress)
+    }
 
-    fun dismissLoading() {
-        isDialog.dismiss()
+    private fun updateData() {
+        tvProgress?.let { tvProgress?.setText(msgProgress) }
+    }
+
+    fun setMessage(msg: String) {
+        msgProgress = msg
+    }
+
+    override fun show() {
+        if (isShowing) {
+            dismiss()
+        }
+        updateData()
+        super.show()
     }
 
 }

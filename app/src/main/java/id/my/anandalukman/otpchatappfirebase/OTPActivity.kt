@@ -1,11 +1,11 @@
 package id.my.anandalukman.otpchatappfirebase
 
-import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
@@ -18,19 +18,25 @@ import java.util.concurrent.TimeUnit
 
 class OTPActivity : AppCompatActivity() {
 
-    var binding : ActivityOtpactivityBinding? = null
-    var verificationId : String? = null
-    var auth : FirebaseAuth? = null
+    private var binding : ActivityOtpactivityBinding? = null
+    private var verificationId : String? = null
+    private var auth : FirebaseAuth? = null
+    private var loading : Loading? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOtpactivityBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
 
-        var loading = Loading(this)
-        loading.startLoading()
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+        loading = Loading(this, 0)
+        loading?.setCancelable(false)
+        loading?.setMessage("Sending OTP")
+        loading?.show()
 
         auth = FirebaseAuth.getInstance()
+
         supportActionBar?.hide()
 
         val phoneNumber = intent.getStringExtra(ChatConstant.PHONE_NUMBER)
@@ -49,7 +55,7 @@ class OTPActivity : AppCompatActivity() {
                     verifyId: String,
                     forceResendingToken: PhoneAuthProvider.ForceResendingToken) {
                     super.onCodeSent(verifyId, forceResendingToken)
-                    loading.dismissLoading()
+                    loading?.dismiss()
 
                     verificationId = verifyId
 
