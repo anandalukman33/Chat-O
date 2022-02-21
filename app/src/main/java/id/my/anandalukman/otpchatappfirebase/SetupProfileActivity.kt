@@ -1,15 +1,12 @@
 package id.my.anandalukman.otpchatappfirebase
 
-import android.R
-import android.app.Dialog
-import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.CountDownTimer
-import android.view.Window
-import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.net.toUri
+import androidx.core.text.parseAsHtml
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
@@ -21,11 +18,12 @@ import java.util.*
 
 class SetupProfileActivity : AppCompatActivity() {
 
-    var binding : ActivitySetupProfileBinding? = null
-    var auth : FirebaseAuth? = null
-    var database : FirebaseDatabase? = null
-    var storage : FirebaseStorage? = null
-    var selectedImage : Uri? = null
+    private var binding : ActivitySetupProfileBinding? = null
+    private var auth : FirebaseAuth? = null
+    private var database : FirebaseDatabase? = null
+    private var storage : FirebaseStorage? = null
+    private var selectedImage : Uri? = null
+    private var loading : Loading? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,8 +31,10 @@ class SetupProfileActivity : AppCompatActivity() {
         binding = ActivitySetupProfileBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
 
-        var loading = Loading(this)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
+        loading = Loading(this, 0)
+        loading?.setCancelable(false)
 
         database = FirebaseDatabase.getInstance()
         storage = FirebaseStorage.getInstance()
@@ -50,7 +50,8 @@ class SetupProfileActivity : AppCompatActivity() {
         }
 
         binding?.profileBtn?.setOnClickListener {
-            loading.startLoading()
+            loading?.setMessage("Update Image")
+            loading?.show()
             val namey : String = binding?.editProfile?.text.toString()
 
             if (namey.isEmpty()) {
@@ -62,17 +63,17 @@ class SetupProfileActivity : AppCompatActivity() {
                 reference?.putFile(selectedImage!!)?.addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         reference.downloadUrl.addOnCompleteListener { uri ->
-                            val imageUrl = uri.toString()
+                            val imageUrl = uri.result.toString()
                             val uid = auth?.uid
                             val phoneNumber = auth?.currentUser?.phoneNumber
                             val name : String = binding?.editProfile?.text.toString()
                             val user = User(uid, name, phoneNumber, imageUrl)
-                            database?.reference
-                                ?.child("users")
-                                ?.child(uid!!)
-                                ?.setValue(user)
-                                ?.addOnCompleteListener {
-                                    loading.dismissLoading()
+                            database!!.reference
+                                .child("users")
+                                .child(uid!!)
+                                .setValue(user)
+                                .addOnCompleteListener {
+                                    loading?.dismiss()
                                     val intent = Intent(this, MainActivity::class.java)
                                     startActivity(intent)
                                     finish()
@@ -89,7 +90,7 @@ class SetupProfileActivity : AppCompatActivity() {
                             .child(uid!!)
                             .setValue(user)
                             .addOnCanceledListener {
-                                loading.dismissLoading()
+                                loading?.dismiss()
                                 val intent = Intent(this, MainActivity::class.java)
                                 startActivity(intent)
                                 finish()
@@ -108,13 +109,13 @@ class SetupProfileActivity : AppCompatActivity() {
                 val uri = data.data // filePath
                 val storage = FirebaseStorage.getInstance()
                 val time = Date().time
-                val reference = storage?.reference
+                val reference = storage.reference
                     .child("Profile")
                     .child(time.toString() + "")
                 reference.putFile(uri!!).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         reference.downloadUrl.addOnCompleteListener { uri ->
-                            val filePath = uri.toString()
+                            val filePath = uri.result.toString()
                             val obj = HashMap<String, Any>()
                             obj["image"] = filePath
                             database!!.reference
