@@ -40,7 +40,7 @@
     <androidx.cardview.widget.CardView
         app:cardUseCompatPadding="true"
         app:cardCornerRadius="8dp"
-        app:cardElevation="14dp"
+        app:cardElevation="13dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -56,12 +56,12 @@
 
             <com.mukesh.OtpView
                 android:id="@+id/otp_view"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
-                android:textSize="20sp"
+                android:textSize="10sp"
                 android:inputType="number"
                 android:itemBackground="#B6B6B6"
                 android:focusableInTouchMode="true"

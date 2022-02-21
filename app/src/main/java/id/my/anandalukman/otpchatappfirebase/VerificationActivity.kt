@@ -3,22 +3,25 @@ package id.my.anandalukman.otpchatappfirebase
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatDelegate
 import com.google.firebase.auth.FirebaseAuth
 import id.my.anandalukman.otpchatappfirebase.constant.ChatConstant
 import id.my.anandalukman.otpchatappfirebase.databinding.ActivityVerificationBinding
 
 class VerificationActivity : AppCompatActivity() {
 
-    var binding : ActivityVerificationBinding? = null
-
-    var auth : FirebaseAuth? = null
+    private var binding : ActivityVerificationBinding? = null
+    private var auth : FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityVerificationBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
 
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
         auth = FirebaseAuth.getInstance()
+
         if (auth!!.currentUser != null) {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)

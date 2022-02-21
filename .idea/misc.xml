@@ -5,12 +5,15 @@
       <map>
         <entry key="..\:/Users/lukman/AndroidStudioProjects/OtpChatAppFirebase/app/src/main/res/drawable/background_shape.xml" value="0.20625" />
         <entry key="..\:/Users/lukman/AndroidStudioProjects/OtpChatAppFirebase/app/src/main/res/drawable/color_progress_bar.xml" value="0.1395" />
-        <entry key="..\:/Users/lukman/AndroidStudioProjects/OtpChatAppFirebase/app/src/main/res/layout/activity_main.xml" value="0.14166666666666666" />
+        <entry key="..\:/Users/lukman/AndroidStudioProjects/OtpChatAppFirebase/app/src/main/res/drawable/gradient_text.xml" value="0.1395" />
+        <entry key="..\:/Users/lukman/AndroidStudioProjects/OtpChatAppFirebase/app/src/main/res/drawable/progress_background.xml" value="0.1395" />
+        <entry key="..\:/Users/lukman/AndroidStudioProjects/OtpChatAppFirebase/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/lukman/AndroidStudioProjects/OtpChatAppFirebase/app/src/main/res/layout/activity_otpactivity.xml" value="0.25" />
         <entry key="..\:/Users/lukman/AndroidStudioProjects/OtpChatAppFirebase/app/src/main/res/layout/activity_setup_profile.xml" value="0.2" />
         <entry key="..\:/Users/lukman/AndroidStudioProjects/OtpChatAppFirebase/app/src/main/res/layout/activity_verification.xml" value="0.25" />
         <entry key="..\:/Users/lukman/AndroidStudioProjects/OtpChatAppFirebase/app/src/main/res/layout/custom_dialog.xml" value="0.22" />
         <entry key="..\:/Users/lukman/AndroidStudioProjects/OtpChatAppFirebase/app/src/main/res/layout/custom_progress_dialog.xml" value="0.22" />
+        <entry key="..\:/Users/lukman/AndroidStudioProjects/OtpChatAppFirebase/app/src/main/res/layout/item_profile.xml" value="0.33" />
         <entry key="..\:/Users/lukman/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/activity_list_item.xml" value="0.1621376811594203" />
       </map>
     </option>
