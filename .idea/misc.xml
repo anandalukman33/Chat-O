@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/anand/StudioProjects/OtpChatAppFirebase/app/src/main/res/layout/activity_chat.xml" value="0.19739583333333333" />
+        <entry key="..\:/Users/anand/StudioProjects/OtpChatAppFirebase/app/src/main/res/layout/item_profile.xml" value="0.19739583333333333" />
+        <entry key="..\:/Users/anand/StudioProjects/OtpChatAppFirebase/app/src/main/res/layout/notification.xml" value="0.19739583333333333" />
+        <entry key="..\:/Users/anand/StudioProjects/OtpChatAppFirebase/app/src/main/res/layout/send_msg.xml" value="0.19739583333333333" />
         <entry key="..\:/Users/lukman/AndroidStudioProjects/OtpChatAppFirebase/app/src/main/res/drawable/background_shape.xml" value="0.20625" />
         <entry key="..\:/Users/lukman/AndroidStudioProjects/OtpChatAppFirebase/app/src/main/res/drawable/bottom_shape.xml" value="0.1545" />
         <entry key="..\:/Users/lukman/AndroidStudioProjects/OtpChatAppFirebase/app/src/main/res/drawable/color_progress_bar.xml" value="0.1395" />

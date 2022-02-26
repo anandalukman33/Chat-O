@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatDelegate
 import com.google.firebase.auth.FirebaseAuth
+import id.my.anandalukman.otpchatappfirebase.asset.User
 import id.my.anandalukman.otpchatappfirebase.databinding.ActivitySplashScreenBinding
 
 @SuppressLint("CustomSplashScreen")
@@ -15,6 +16,7 @@ class SplashScreenActivity : AppCompatActivity() {
     private var auth : FirebaseAuth? = null
     private var binding : ActivitySplashScreenBinding? = null
     private lateinit var handler : Handler
+    private var user : User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
