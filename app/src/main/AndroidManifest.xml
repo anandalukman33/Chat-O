@@ -2,27 +2,30 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="id.my.anandalukman.otpchatappfirebase">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:requestLegacyExternalStorage="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_chato"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_chato"
         android:supportsRtl="true"
         android:theme="@style/Theme.OtpChatAppFirebase">
         <activity
-            android:name=".SetupProfileActivity"
+            android:name=".message.ChatMain"
             android:exported="false" />
         <activity
-            android:name=".OTPActivity"
+            android:name=".activity.SetupProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.OTPActivity"
             android:exported="false" />
         <activity
-            android:name=".VerificationActivity"
+            android:name=".activity.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.VerificationActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

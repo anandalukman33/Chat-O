@@ -1,4 +1,4 @@
-package id.my.anandalukman.otpchatappfirebase
+package id.my.anandalukman.otpchatappfirebase.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

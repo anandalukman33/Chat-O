@@ -1,6 +1,5 @@
-package id.my.anandalukman.otpchatappfirebase
+package id.my.anandalukman.otpchatappfirebase.activity
 
-import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.LinearGradient
 import android.graphics.Shader
@@ -14,8 +13,9 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import id.my.anandalukman.otpchatappfirebase.adapter.UserAdapter
-import id.my.anandalukman.otpchatappfirebase.bean.User
+import id.my.anandalukman.otpchatappfirebase.R
+import id.my.anandalukman.otpchatappfirebase.`interface`.UserAdapter
+import id.my.anandalukman.otpchatappfirebase.asset.User
 import id.my.anandalukman.otpchatappfirebase.databinding.ActivityMainBinding
 import id.my.anandalukman.otpchatappfirebase.widget.Loading
 
@@ -95,14 +95,14 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         val currentId = FirebaseAuth.getInstance().uid
-        database!!.reference.child("presence")
+        database!!.reference.child("Presence")
             .child(currentId!!).setValue("Online")
     }
 
     override fun onPause() {
         super.onPause()
         val currentId = FirebaseAuth.getInstance().uid
-        database!!.reference.child("presence")
+        database!!.reference.child("Presence")
             .child(currentId!!).setValue("Offline")
     }
 }
