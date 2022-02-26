@@ -1,28 +1,41 @@
 package id.my.anandalukman.otpchatappfirebase.message
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
+import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import id.my.anandalukman.otpchatappfirebase.R
 import id.my.anandalukman.otpchatappfirebase.`interface`.MessagesAdapter
+import id.my.anandalukman.otpchatappfirebase.api.RetrofitInstance
+import id.my.anandalukman.otpchatappfirebase.asset.NotificationBean
+import id.my.anandalukman.otpchatappfirebase.asset.NotificationData
+import id.my.anandalukman.otpchatappfirebase.asset.User
 import id.my.anandalukman.otpchatappfirebase.constant.ChatConstant.GET_PHOTO_MESSAGE
 import id.my.anandalukman.otpchatappfirebase.constant.ChatConstant.SELECTED_IMAGE_CHAT
 import id.my.anandalukman.otpchatappfirebase.constant.ChatConstant.SELECTED_NAME_CHAT
 import id.my.anandalukman.otpchatappfirebase.constant.ChatConstant.SELECTED_UID_CHAT
 import id.my.anandalukman.otpchatappfirebase.databinding.ActivityChatBinding
+import id.my.anandalukman.otpchatappfirebase.widget.GsonUtils
 import id.my.anandalukman.otpchatappfirebase.widget.Loading
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.lang.Exception
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
@@ -39,6 +52,9 @@ class ChatMain : AppCompatActivity() {
     var database : FirebaseDatabase? = null
     var storage : FirebaseStorage? = null
     var dialog : Loading? = null
+    var firebaseUser : FirebaseUser? = null
+    var databaseReference : DatabaseReference? = null
+    var userBean : User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +75,11 @@ class ChatMain : AppCompatActivity() {
         var name = intent.getStringExtra(SELECTED_NAME_CHAT)
         var profile = intent.getStringExtra(SELECTED_IMAGE_CHAT)
 
+        firebaseUser = FirebaseAuth.getInstance().currentUser!!
+
+        databaseReference =
+            FirebaseDatabase.getInstance().getReference("users").child(firebaseUser!!.uid)
+
         binding!!.tvName.text = name
 
         Picasso.get()
@@ -76,7 +97,8 @@ class ChatMain : AppCompatActivity() {
                     if (snapshot.exists()) {
                         val status = snapshot.getValue(String::class.java)
                         if (status == "Offline") {
-                            binding!!.tvStatus.visibility = View.GONE
+                            binding!!.tvStatus.visibility = View.VISIBLE
+                            binding!!.tvStatus.text = status
                         } else {
                             binding!!.tvStatus.text = status
                             binding!!.tvStatus.visibility = View.VISIBLE
@@ -118,6 +140,27 @@ class ChatMain : AppCompatActivity() {
             val message = MessageMain(messageTxt, senderUid, date.time)
 
             binding!!.messageBox.setText("")
+
+
+            databaseReference!!.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val user = snapshot.getValue(User::class.java)
+                    var topic = "/topics/$receiverUid"
+                    NotificationBean(
+                        NotificationData( user?.name!!,messageTxt),
+                        topic
+                    ).also {
+                        sendNotification(it)
+                    }
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(applicationContext, error.message, Toast.LENGTH_SHORT).show()
+                }
+
+            })
+
             val randomKey = database!!.reference.push().key
             val lastMsgObj = HashMap<String, Any>()
             lastMsgObj["lastMsg"] = message.message!!
@@ -179,6 +222,9 @@ class ChatMain : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
+        var name = intent.getStringExtra(SELECTED_NAME_CHAT)
+
         if (requestCode == 25) {
             if (data != null) {
                 if (data.data != null) {
@@ -201,6 +247,25 @@ class ChatMain : AppCompatActivity() {
                                     message.message = GET_PHOTO_MESSAGE
                                     message.imageUrl = filePath
                                     binding!!.messageBox.setText("")
+
+                                    databaseReference!!.addValueEventListener(object : ValueEventListener {
+                                        override fun onDataChange(snapshot: DataSnapshot) {
+                                            val user = snapshot.getValue(User::class.java)
+                                            var topic = "/topics/$receiverUid"
+                                            NotificationBean(
+                                                NotificationData( user?.name!!,"${user.name!!} mengirim "+message.message),
+                                                topic
+                                            ).also {
+                                                sendNotification(it)
+                                            }
+
+                                        }
+
+                                        override fun onCancelled(error: DatabaseError) {
+                                            Toast.makeText(applicationContext, error.message, Toast.LENGTH_SHORT).show()
+                                        }
+
+                                    })
 
                                     val randomKey = database!!.reference.push().key
                                     val lastMsgObj = HashMap<String, Any>()
@@ -248,5 +313,18 @@ class ChatMain : AppCompatActivity() {
         database!!.reference.child("Presence")
             .child(currentId!!)
             .setValue("Offline")
+    }
+
+    private fun sendNotification(notification: NotificationBean) = CoroutineScope(Dispatchers.IO).launch {
+        try {
+            val response = RetrofitInstance.api.postNotification(notification)
+            if(response.isSuccessful) {
+                Log.d("TAG", "Response: ${Gson().toJson(response)}")
+            } else {
+                Log.e("TAG", response.errorBody()!!.string())
+            }
+        } catch(e: Exception) {
+            Log.e("TAG", e.toString())
+        }
     }
 }

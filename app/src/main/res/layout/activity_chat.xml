@@ -39,7 +39,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="center_vertical"
                 android:layout_marginStart="15dp"
                 android:orientation="vertical">
 
@@ -47,10 +47,8 @@
                     android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
                     android:text="Kanna Hashimoto"
-                    android:textAlignment="center"
+                    android:textAlignment="textStart"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold|normal" />

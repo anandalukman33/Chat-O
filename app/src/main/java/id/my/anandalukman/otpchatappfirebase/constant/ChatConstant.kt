@@ -16,4 +16,9 @@ object ChatConstant {
 
     const val GET_PHOTO_MESSAGE = "photo"
 
+    const val SERVER_KEY = "AAAAaaXWlPk:APA91bGqdK2rWbQ5tkBLo_AgXrArVHUzledG5vXQS313ffk-MnX7r-fU2Y4vPZ-FX6nNJ3tpqmsUSOVk3zID4s7ckOw0NqcX34_v8rVnybptIMVGLsfmZERo05-FK_N280bN3EkwAMUO"
+
+    const val CONTENT_TYPE = "application/json"
+
+    const val BASE_URL = "https://fcm.googleapis.com"
 }
