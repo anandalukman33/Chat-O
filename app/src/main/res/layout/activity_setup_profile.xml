@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:layout_gravity="center"
     android:gravity="center_horizontal"
-    tools:context=".SetupProfileActivity">
+    tools:context=".activity.SetupProfileActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ivProfile"

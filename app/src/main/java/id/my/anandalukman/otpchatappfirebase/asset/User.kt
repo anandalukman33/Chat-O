@@ -1,4 +1,4 @@
-package id.my.anandalukman.otpchatappfirebase.bean
+package id.my.anandalukman.otpchatappfirebase.asset
 
 class User {
     var uid : String? = null
