@@ -1,16 +1,14 @@
-package id.my.anandalukman.otpchatappfirebase
+package id.my.anandalukman.otpchatappfirebase.activity
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.net.toUri
-import androidx.core.text.parseAsHtml
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-import id.my.anandalukman.otpchatappfirebase.bean.User
+import id.my.anandalukman.otpchatappfirebase.asset.User
 import id.my.anandalukman.otpchatappfirebase.databinding.ActivitySetupProfileBinding
 import id.my.anandalukman.otpchatappfirebase.widget.Loading
 import java.util.*
@@ -50,7 +48,7 @@ class SetupProfileActivity : AppCompatActivity() {
         }
 
         binding?.profileBtn?.setOnClickListener {
-            loading?.setMessage("Update Image")
+            loading?.setMessage("Preparing...")
             loading?.show()
             val namey : String = binding?.editProfile?.text.toString()
 

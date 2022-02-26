@@ -1,8 +1,10 @@
-package id.my.anandalukman.otpchatappfirebase
+package id.my.anandalukman.otpchatappfirebase.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
@@ -69,21 +71,30 @@ class OTPActivity : AppCompatActivity() {
             }).build()
 
         PhoneAuthProvider.verifyPhoneNumber(options)
-        binding?.otpView?.setOtpCompletionListener { otp ->
-            val credential = PhoneAuthProvider.getCredential(verificationId!!, otp)
-            auth?.signInWithCredential(credential)?.addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        val intent = Intent(this, SetupProfileActivity::class.java)
-                        startActivity(intent)
-                        finishAffinity()
-                    } else {
-                        Toast.makeText(
-                            this,
-                            "Failed get Credential",
-                            Toast.LENGTH_SHORT
-                        ).show()
+        binding?.otpView?.addTextChangedListener(object : TextWatcher {
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                if (s!!.length == 6) {
+                    val credential = PhoneAuthProvider.getCredential(verificationId!!, s.toString())
+                    auth?.signInWithCredential(credential)?.addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            val intent = Intent(this@OTPActivity, SetupProfileActivity::class.java)
+                            startActivity(intent)
+                            finishAffinity()
+                            finish()
+                        } else {
+                            Toast.makeText(
+                                this@OTPActivity,
+                                "Failed get Credential",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
                 }
-        }
+            }
+
+        })
     }
 }

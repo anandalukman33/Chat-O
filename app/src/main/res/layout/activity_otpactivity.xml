@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:layout_gravity="center"
     android:gravity="center_horizontal"
-    tools:context=".OTPActivity">
+    tools:context=".activity.OTPActivity">
 
     <ImageView
         android:layout_width="250dp"
@@ -54,20 +54,32 @@
             android:padding="15dp"
             android:layout_margin="15dp">
 
-            <com.mukesh.OtpView
+            <id.my.anandalukman.otpchatappfirebase.widget.OtpEditText
                 android:id="@+id/otp_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:textSize="10sp"
+                android:cursorVisible="false"
+                android:digits="1234567890"
                 android:inputType="number"
-                android:itemBackground="#B6B6B6"
-                android:focusableInTouchMode="true"
-                app:OtpItemCount="6"
-                app:OtpLineColor="#ff7382"
-                app:OtpViewType="line"/>
+                android:maxLength="6"
+                android:textIsSelectable="false"
+                android:textSize="20sp"
+                android:layout_marginBottom="8dp"/>
+
+<!--            <com.mukesh.OtpView-->
+<!--                android:id="@+id/otp_view"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginBottom="10dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:textSize="10sp"-->
+<!--                android:inputType="number"-->
+<!--                android:itemBackground="#B6B6B6"-->
+<!--                android:focusableInTouchMode="true"-->
+<!--                app:OtpItemCount="6"-->
+<!--                app:OtpLineColor="#ff7382"-->
+<!--                app:OtpViewType="line"/>-->
 
             <Button
                 android:id="@+id/continueBtn"

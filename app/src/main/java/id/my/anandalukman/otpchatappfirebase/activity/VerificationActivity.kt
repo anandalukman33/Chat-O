@@ -1,4 +1,4 @@
-package id.my.anandalukman.otpchatappfirebase
+package id.my.anandalukman.otpchatappfirebase.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +25,7 @@ class VerificationActivity : AppCompatActivity() {
         if (auth!!.currentUser != null) {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            finishAffinity()
             finish()
         }
         supportActionBar?.hide()
@@ -33,6 +34,8 @@ class VerificationActivity : AppCompatActivity() {
             val intent = Intent(this, OTPActivity::class.java)
             intent.putExtra(ChatConstant.PHONE_NUMBER, binding?.editNumber?.text.toString())
             startActivity(intent)
+            finishAffinity()
+            finish()
         }
     }
 }
