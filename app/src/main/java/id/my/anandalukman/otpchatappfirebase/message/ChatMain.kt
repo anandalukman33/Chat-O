@@ -51,7 +51,7 @@ class ChatMain : AppCompatActivity() {
         storage = FirebaseStorage.getInstance()
 
         dialog = Loading(this, 0)
-        dialog!!.setMessage("Uploading image")
+        dialog!!.setMessage("Please wait...")
         dialog!!.setCancelable(false)
 
         message = ArrayList()
@@ -64,7 +64,6 @@ class ChatMain : AppCompatActivity() {
         Picasso.get()
             .load(profile)
             .placeholder(R.drawable.placeholder)
-            .error(R.mipmap.ic_chato)
             .into(binding!!.iconProfile)
 
         binding!!.ivBack.setOnClickListener { finish() }

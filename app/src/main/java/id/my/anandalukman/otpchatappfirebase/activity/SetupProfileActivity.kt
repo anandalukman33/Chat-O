@@ -48,7 +48,7 @@ class SetupProfileActivity : AppCompatActivity() {
         }
 
         binding?.profileBtn?.setOnClickListener {
-            loading?.setMessage("Update Image")
+            loading?.setMessage("Preparing...")
             loading?.show()
             val namey : String = binding?.editProfile?.text.toString()
 

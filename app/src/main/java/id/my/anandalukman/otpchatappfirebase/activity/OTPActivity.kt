@@ -83,6 +83,7 @@ class OTPActivity : AppCompatActivity() {
                             val intent = Intent(this@OTPActivity, SetupProfileActivity::class.java)
                             startActivity(intent)
                             finishAffinity()
+                            finish()
                         } else {
                             Toast.makeText(
                                 this@OTPActivity,

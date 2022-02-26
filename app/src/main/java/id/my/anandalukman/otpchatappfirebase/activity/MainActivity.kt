@@ -1,5 +1,6 @@
 package id.my.anandalukman.otpchatappfirebase.activity
 
+import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.LinearGradient
 import android.graphics.Shader
@@ -51,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         loading = Loading(this, 0)
-        loading?.setMessage("Uploading Image")
+        loading?.setMessage("Getting data user")
         loading?.setCancelable(false)
         loading?.show()
 
@@ -104,5 +105,19 @@ class MainActivity : AppCompatActivity() {
         val currentId = FirebaseAuth.getInstance().uid
         database!!.reference.child("Presence")
             .child(currentId!!).setValue("Offline")
+    }
+
+    override fun onBackPressed() {
+        val dialog = AlertDialog.Builder(this)
+            .setTitle("Information")
+            .setMessage("Close this App?")
+            .setPositiveButton("Yes") { dialog, which ->
+                finishAffinity()
+                finish()
+            }
+            .setNegativeButton("No") { dialog, which ->
+                dialog.dismiss()
+            }
+        dialog.show()
     }
 }
