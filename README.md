@@ -43,9 +43,9 @@
     <br />
     <a href="#">View Demo</a>
     ·
-    <a href="#">Report Bug</a>
+    <a href="https://github.com/anandalukman33/OtpChatAppFirebase/issues">Report Bug</a>
     ·
-    <a href="#">Request Feature</a>
+    <a href="https://github.com/anandalukman33/OtpChatAppFirebase/issues">Request Feature</a>
   </p>
 </div>
 
@@ -58,14 +58,14 @@
     <li>
       <a href="#about-the-project">Tentang Projek</a>
       <ul>
-        <li><a href="#built-with"></a></li>
+        <li><a href="#built-with">Dibuat dengan</a></li>
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
+      <a href="#getting-started">Memulai Project</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#prerequisites">Persyaratan</a></li>
+        <li><a href="#installation">Installasi</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
@@ -80,9 +80,9 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+## Tentang Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]](https://github.com/anandalukman33/OtpChatAppFirebase/blob/readme/s1.png)
 
 There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
 
